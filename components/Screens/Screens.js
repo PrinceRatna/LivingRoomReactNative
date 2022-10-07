@@ -17,65 +17,58 @@ import Profile from '../Profile/Profile'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../Home/Home';
 
+
 const Tab = createBottomTabNavigator();
 
+  const Screen = () => {
 
-// create a component
-const Screen = () => {
-
-
-  
-    return (
+       return (
       
-    <Tab.Navigator
-      initialRouteName="Home"
-       >
-      <Tab.Screen name="Home" component={Home}
-       options={{
-        headerShown: false,
-        tabBarActiveTintColor:'black',
-        tabBarLabel: '',
-        tabBarIcon: ({ color }) => (
-          <Icon  name="home" color={color} size={26} />
-        ),
-      }}
-      />
-      <Tab.Screen name="LivingRoom" component={LivingRoom}
-       options={{
-        headerShown: false,
-        tabBarActiveTintColor:'black',
-        tabBarLabel: '',
-        tabBarIcon: ({ color }) => (
-          <AntIcon  name="appstore1" color={color} size={26} />
-        ),
-      }}
-      />
-      <Tab.Screen name="Statistic" component={Statistic} 
-       options={{
-        headerShown: false,
-        tabBarActiveTintColor:'black',
-
-        tabBarLabel: '',
-        tabBarIcon: ({ color }) => (
-          <Icon  name="flash-outline" color={color} size={26} />
-        ),
-      }}
-      />
-      <Tab.Screen name="Profile" component={Profile} 
-       options={{
-        headerShown: false,
-        tabBarActiveTintColor:'black',
-
-        tabBarLabel: '',
-        tabBarIcon: ({ color }) => (
-          <AntIcon  name="user" color={color} size={26} />
-        ),
-      }}
-      />
-    </Tab.Navigator>
-        
-    );
-};
+               <Tab.Navigator initialRouteName="Home" >
+                          <Tab.Screen name="Home" component={Home}
+                                   options={{
+                                   headerShown: false,
+                                   tabBarActiveTintColor:'black',
+                                   tabBarLabel: '',
+                                   tabBarIcon: ({ color }) => (
+                                     <Icon  name="home" color={color} size={26} />
+                                   ),
+                                 }}
+                          />
+                          <Tab.Screen name="LivingRoom" component={LivingRoom}
+                                   options={{
+                                   headerShown: false,
+                                   tabBarActiveTintColor:'black',
+                                   tabBarLabel: '',
+                                   tabBarIcon: ({ color }) => (
+                                   <AntIcon  name="appstore1" color={color} size={26} />
+                                   ),
+                                 }}
+                          />
+                          <Tab.Screen name="Statistic" component={Statistic} 
+                                   options={{
+                                   headerShown: false,
+                                   tabBarActiveTintColor:'black',
+                                   tabBarLabel: '',
+                                   tabBarIcon: ({ color }) => (
+                                   <Icon  name="flash-outline" color={color} size={26} />
+                                   ),
+                                 }}
+                          />
+                          <Tab.Screen name="Profile" component={Profile} 
+                                   options={{
+                                   headerShown: false,
+                                   tabBarActiveTintColor:'black',
+                                   tabBarLabel: '',
+                                   tabBarIcon: ({ color }) => (
+                                     <AntIcon  name="user" color={color} size={26} />
+                                   ),
+                                 }}
+                          />
+               </Tab.Navigator>
+                   
+           );
+   };
 
 
 export default Screen;

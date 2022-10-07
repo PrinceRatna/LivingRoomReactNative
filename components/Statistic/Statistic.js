@@ -4,61 +4,65 @@
 /* eslint-disable prettier/prettier */
 //import liraries
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView , Dimensions, SafeAreaView, Button, Pressable} from 'react-native';
+import { View, Text, StyleSheet, ScrollView , Dimensions} from 'react-native';
 import BarGraph from '../BarGraph/BarGraph';
 import ButtonScreen from '../ButtonScreen/ButtonScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-const rows = 3;
-const cols = 2;
-const marginHorizontal = 4;
-const marginVertical = 10;
-const width = (Dimensions.get('window').width / cols) - (marginHorizontal * (cols + 1));
-const height = 35;
-// create a component
-const Statistic = ({navigation}) => {
-         
-    return (
-        <ScrollView style={styles.scrollViewContainer}>
-          
-         <View style={styles.headerContainer}>
-            <Icon name="arrow-back"  size={30}  onPress={() => {
-        navigation.navigate('LivingRoom')}}/>
-        <Text style={styles.headersText}> Statistic</Text>
-        </View>
+       const rows = 3;
+       const cols = 2;
+       const marginHorizontal = 4;
+       const marginVertical = 10;
+       const width = (Dimensions.get('window').width / cols) - (marginHorizontal * (cols + 1));
+       const height = 35;
 
+        
+       const Statistic = ({navigation}) => {
+                
+           return (
+               <ScrollView style={styles.scrollViewContainer}>
+                        <View style={styles.headerContainer}>
+                            <Icon name="arrow-back"  size={30}  onPress={() => {
+                             navigation.navigate('LivingRoom')}}/>
+                            <Text style={styles.headersText}> Statistic</Text>
+                        </View>
+                        <View>
 
-        <View>
-            <ButtonScreen/>
-            <BarGraph/>
-            
-    
-      <View style={styles.sectionContainer}>
-        <View style={styles.boxContainer}><Text style={styles.text}>Monthly expense</Text></View>
-        <View style={styles.boxContainer}><Text style={styles.text1}>view all</Text></View>
-        <View style={styles.boxContainer}>
-            <Text style={styles.text}>August 2021</Text>
-            <Text>20% more from Oct</Text>
-        </View>
-        <View style={styles.boxContainer}>
-            <Text style={styles.text}>$120</Text>
-        </View>
-        <View style={styles.boxContainer}>
-            <Text style={styles.text}>July 2021</Text>
-            <Text>20% more from Oct</Text>
-        </View>
-        <View style={styles.boxContainer}><Text style={styles.text}>$100</Text></View>
+                          {/* ----------Button--------*/}
+                          <ButtonScreen/>
+                          {/*----------- graph------ */}
+                           <BarGraph/>
+                         
+                 
+                        <View style={styles.sectionContainer}>
+                              <View style={styles.boxContainer}>
+                                <Text style={styles.text}>Monthly expense</Text>
+                             </View>
+                              <View style={styles.boxContainer}>
+                                <Text style={styles.text1}>view all</Text>
+                              </View>
+                              <View style={styles.boxContainer}>
+                                  <Text style={styles.text}>August 2021</Text>
+                                  <Text>20% more from Oct</Text>
+                              </View>
+                              <View style={styles.boxContainer}>
+                                  <Text style={styles.text}>$120</Text>
+                              </View>
+                              <View style={styles.boxContainer}>
+                                  <Text style={styles.text}>July 2021</Text>
+                                  <Text>20% more from Oct</Text>
+                              </View>
+                              <View style={styles.boxContainer}>
+                                <Text style={styles.text}>$100</Text>
+                              </View>
+                        </View>
+                     </View>
+               </ScrollView>
+           );
+       };
        
-      </View>
-  
-  
-        </View>
-        </ScrollView>
-    );
-};
-
-// define your styles
+// -------------define your styles------------
 const styles = StyleSheet.create({
      headerContainer: {
         display:'flex',
@@ -106,8 +110,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'yellow',
-      }
+      },
 });
 
-//make this component available to the app
 export default Statistic;
