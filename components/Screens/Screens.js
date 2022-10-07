@@ -13,8 +13,6 @@ import LivingRoom from '../LivingRoom/LivingRoom';
 import Statistic from '../Statistic/Statistic';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Feed from '../Feed/Feed';
-import Notifications from '../Notifications/Notifications';
 import Profile from '../Profile/Profile'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../Home/Home';
@@ -24,6 +22,9 @@ const Tab = createBottomTabNavigator();
 
 // create a component
 const Screen = () => {
+
+
+  
     return (
       
     <Tab.Navigator

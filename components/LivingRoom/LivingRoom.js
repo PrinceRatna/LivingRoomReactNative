@@ -18,6 +18,10 @@ import Slider from '@react-native-community/slider';
 const LivingRoom = ({navigation}) => {
     const [isEnabled, setIsEnabled] = React.useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+
+    const [slideCompletionValue, setSlideCompletionValue] = React.useState(0);
+
     return (
         <ScrollView>
              {/* <Icon style={{marginLeft:30,marginTop:15}} name="arrow-back"  size={30}  onPress={() => {
@@ -75,14 +79,20 @@ const LivingRoom = ({navigation}) => {
 
           <View style={{margin:20}}>
             <Text style={styles.text}>Energy Price Threshold Controller</Text>
+            <Text style={styles.dolar}>Cost: ${slideCompletionValue}</Text>
               <Slider
                    style={{width:'95%', height: 60}}
                    minimumValue={0}
                    maximumValue={150}
                    minimumTrackTintColor="black"
                    maximumTrackTintColor="#000000"
+                   onSlidingComplete={value => {
+                    setSlideCompletionValue(value);
+                   
+                  }}
                 />
           </View>
+          <Text style={styles.footerText}>Set your Price To Auto Turn Off Devices Based On Nordpool Prices</Text>
 
          </ScrollView>
     );
@@ -126,6 +136,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#c9c7c7',
 
         borderRadius:15,
+    },
+    dolar:{
+     marginLeft:'30%', 
+     fontSize: 18,
+     fontWeight:'bold',
+     marginTop:25,
+
+
+    },
+    footerText:{
+      margin:15,
+      borderWidth:1,
+      borderRadius:10,
+      borderColor:'green',
+      padding:8,
     }
 });
 
