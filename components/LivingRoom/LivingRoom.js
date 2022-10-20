@@ -1,16 +1,22 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-alert */
+/* eslint-disable keyword-spacing */
+/* eslint-disable semi */
+/* eslint-disable comma-dangle */
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 //import liraries
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView,Image, Switch } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ToggleSwitch from 'toggle-switch-react-native'
 import Slider from '@react-native-community/slider';
-
+import { Button } from 'react-native-paper';
 
 
 
@@ -20,8 +26,21 @@ const LivingRoom = ({navigation}) => {
         const toggleSwitch = () => setIsEnabled(previousState => !previousState);
         const [slideCompletionValue, setSlideCompletionValue] = React.useState(0);
 
+        // fetching data from backend
+       
+        
+
+       
+
+
+
+
     return (
         <ScrollView>
+          {/* <Button onPress={handleProductSubmit}>CLICK</Button> */}
+          {/* {
+            dayPrice.map(data=><Text>Price :{data.price}</Text>) 
+          } */}
          <View style={styles.container}>
               <View> 
                  <Text style={styles.text}> Living Room</Text>
