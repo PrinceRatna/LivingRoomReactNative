@@ -25,7 +25,7 @@ import { View, StyleSheet } from 'react-native';
         hasXAxisBackgroundLines: false,
         xAxisLabelStyle: {
           position: 'left',
-          prefix: '$',
+          prefix: '€',
         }
       };
 
@@ -61,8 +61,8 @@ import { View, StyleSheet } from 'react-native';
        let graphDataValueX=[];
 
       
-       dayPrice.map(data=>graphDataValueX.push(data.date));
-       dayPrice.map(data=>graphDataValueY.push(data.price));
+       dayPrice.map(data=>graphDataValueX.push(data.time));
+       dayPrice.map(data=>graphDataValueY.push(data.price/100));
    
      
       // console.log(graphDataValueY.slice(15,24));
@@ -71,8 +71,8 @@ import { View, StyleSheet } from 'react-native';
               <SafeAreaView>
                
                   <VerticalBarGraph
-                    data={graphDataValueY.slice(20,24)}
-                    labels={graphDataValueX.slice(20,24)}
+                    data={graphDataValueY.slice(15,24)}
+                    labels={graphDataValueX.slice(15,24)}
                     width={375}
                     height={300}
                     barColor='black'

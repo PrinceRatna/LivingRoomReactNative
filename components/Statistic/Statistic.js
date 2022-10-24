@@ -8,6 +8,7 @@ import { View, Text, StyleSheet, ScrollView , Dimensions} from 'react-native';
 import BarGraph from '../BarGraph/BarGraph';
 import ButtonScreen from '../ButtonScreen/ButtonScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import LineGraph from '../LineGraph/LineGraph';
 
 
        const rows = 3;
@@ -32,8 +33,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
                           {/* ----------Button--------*/}
                           <ButtonScreen/>
                           {/*----------- graph------ */}
-                           <BarGraph/>
-                         
+                           {/* <BarGraph/> */}
+                         <LineGraph/>
                  
                         <View style={styles.sectionContainer}>
                               <View style={styles.boxContainer}>

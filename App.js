@@ -6,13 +6,17 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Screen from './components/Screens/Screens';
+import { View } from 'react-native';
 
 const App=()=> {
+
+  
+  
   return (
-    <NavigationContainer>
-      <Screen/>
-    </NavigationContainer>
-  );
+  <NavigationContainer>
+    <Screen/>   
+</NavigationContainer>
+  )
 }
 
 
@@ -21,7 +25,7 @@ export default App;
 
 
 
-
+ 
 
 
 
