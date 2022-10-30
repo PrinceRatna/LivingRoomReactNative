@@ -6,9 +6,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView , Dimensions} from 'react-native';
 import BarGraph from '../BarGraph/BarGraph';
-import ButtonScreen from '../ButtonScreen/ButtonScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LineGraph from '../LineGraph/LineGraph';
+import StaticButton from '../StaticButton/StaticButton';
 
 
        const rows = 3;
@@ -31,7 +31,8 @@ import LineGraph from '../LineGraph/LineGraph';
                         <View>
 
                           {/* ----------Button--------*/}
-                          <ButtonScreen/>
+                          {/* <ButtonScreen/> */}
+                          {/* <StaticButton/> */}
                           {/*----------- graph------ */}
                            {/* <BarGraph/> */}
                          <LineGraph/>

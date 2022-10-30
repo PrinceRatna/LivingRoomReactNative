@@ -17,23 +17,109 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ToggleSwitch from 'toggle-switch-react-native'
 import Slider from '@react-native-community/slider';
 import { Button } from 'react-native-paper';
+import {User} from '../../App';
+import { useContext } from 'react';
+import { Pressable } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 
 
 const LivingRoom = ({navigation}) => {
+      const {price,setPrice,mac,setMac}=useContext(User);
 
         const [isEnabled, setIsEnabled] = React.useState(false);
         const toggleSwitch = () => setIsEnabled(previousState => !previousState);
         const [slideCompletionValue, setSlideCompletionValue] = React.useState(0);
+        const[userDetail,setUserDetail]=React.useState({});
 
-        // fetching data from backend
+          //  -----------------------get all users--------------------------------
+        async function getUsers() {
+          const response = await fetch(
+            'http://192.168.0.108:5000/allUsers',
+            {
+              method: 'GET',
+             
+            }
+          );
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+
+          return data;
+        }
        
-        
-
        
 
+        //---------------------- button click handle -------------------------
+        const handlePrice=async ()=>{
+          setPrice(slideCompletionValue);
+          let users=await  getUsers();
+                
+          // console.log('Users from db:', users );
 
 
+          let result =await users.filter(function (user)
+          {
+            return user.macId==mac;
+          });
+
+
+
+    //  -----------------------update price -----------------------
+           if(result[0]){
+
+            fetch('http://192.168.0.108:5000/allUsers',{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify({
+              price:slideCompletionValue,
+              macId:mac
+            })
+
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            if(data.modifiedCount){
+                alert('Successfully added new price .')
+            }
+        })
+
+
+           }
+
+          //  -------------------------post new users----------------------
+           else{
+            fetch('http://192.168.0.108:5000/AddUsers',{
+              method:'POST',
+              headers:{
+                  'content-type':'application/json',
+                          'Connection':'keep-alive',
+                          'Accept-Encoding':'gzip,deflate,br',
+                          'Accept':'*/*'
+              },
+              body:JSON.stringify({
+                price:slideCompletionValue,
+                macId:mac
+              })
+  
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            if(data.insertedId){
+              alert('Successfully Added .')
+          }
+             
+          })
+
+           }
+
+        }
+
+       
 
     return (
         <ScrollView>
@@ -83,13 +169,13 @@ const LivingRoom = ({navigation}) => {
         </View>
      
                  {/*--------------- slider------------------- */}
-          <View style={{margin:20}}>
+          <View style={styles.slideContainer}>
                      <Text style={styles.text}>Energy Price Threshold Controller</Text>
-                     <Text style={styles.dolar}>Cost: ${slideCompletionValue}</Text>
+                     <Text style={styles.dolar}>Cost: € {slideCompletionValue.toPrecision(3)}</Text>
                       <Slider
                             style={{width:'95%', height: 60}}
-                            minimumValue={0}
-                            maximumValue={150}
+                            minimumValue={0.1}
+                            maximumValue={100}
                             minimumTrackTintColor="black"
                             maximumTrackTintColor="#000000"
                             onSlidingComplete={value => {
@@ -97,6 +183,9 @@ const LivingRoom = ({navigation}) => {
                             
                            }}
                       />
+                       <Pressable style={styles.button} onPress={handlePrice} >
+                        <Text style={styles. buttonText}>SUBMIT</Text>
+                      </Pressable>
           </View>
           <Text style={styles.footerText}>Set your Price To Auto Turn Off Devices Based On Nordpool Prices</Text>
 
@@ -132,8 +221,8 @@ const styles = StyleSheet.create({
                padding:10,
                 },
               tinyLogo: {
-                width:300,
-                height: 400,
+                width:350,
+                height: 270,
               },
            
             footer:{
@@ -145,7 +234,7 @@ const styles = StyleSheet.create({
                 borderRadius:15,
             },
             dolar:{
-             marginLeft:'30%', 
+            //  marginLeft:'30%', 
              fontSize: 18,
              fontWeight:'bold',
              marginTop:25,
@@ -158,6 +247,33 @@ const styles = StyleSheet.create({
               borderRadius:10,
               borderColor:'green',
               padding:8,
+            },
+            slideContainer: {
+      
+              display:'flex',
+              // justifyContent:'center',
+              alignItems: 'center',
+              // height:'100%',
+              marginHorizontal:2,
+              marginVertical:20
+          },
+         
+            button: {
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingVertical: 12,
+              paddingHorizontal: 32,
+              borderRadius: 10,
+              backgroundColor: 'black',
+              marginTop:10,
+              width:'80%',
+            },
+            buttonText: {
+              fontSize:25,
+              lineHeight:30,
+              fontWeight: 'bold',
+              letterSpacing: 1,
+              color: 'white',
             },
   });
 

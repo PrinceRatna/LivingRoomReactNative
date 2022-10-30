@@ -4,21 +4,38 @@
 //import liraries
 //import liraries
 import React from 'react';
+import { useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet,  Pressable, TextInput } from 'react-native';
-
+import {User} from '../../App';
         const Home = () => {
+          const {mac,setMac}=useContext(User);
+          const[onChangeMacId,setOnChangeMacId]=React.useState("");
+
+          const handleId=()=>{
+            setMac(onChangeMacId);
+            alert('Go to living room page and set price.')
+
+
+          }
+          const onChangeNumber=(e)=>{
+            setOnChangeMacId(e)
+ 
+          }
+
             return (
                 <View style={styles.container}>
                      <Text style={styles.headerText}>Making Your Appliances Smarter</Text>
                      <TextInput
                      style={styles.input}
-                     // onChangeText={onChangeNumber}
-                     // value={number}
+                     onChangeText={onChangeNumber}
+                    //  value={macId}
                      placeholder="Enter Device Mac Add:"
                      />
-                     <Pressable style={styles.button} >
-                            <Text style={styles.text}>Add Device</Text>
+                     <Pressable style={styles.button} onPress={handleId} >
+                      <Text style={styles.text}>Add Device</Text>
                       </Pressable>
+                     
                 </View>
                
             );

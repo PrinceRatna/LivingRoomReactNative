@@ -10,24 +10,19 @@
 //import liraries
 //import liraries
 import React, { useEffect }from 'react';
-import { View,  StyleSheet, SafeAreaView } from 'react-native';
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-  } from "react-native-chart-kit";
+import { SafeAreaView } from 'react-native';
+import {LineChart} from "react-native-chart-kit";
   import { Dimensions } from "react-native";
   import { Circle, G,Rect,Text} from 'react-native-svg';
+import StaticButton from '../StaticButton/StaticButton';
 
   const screenWidth  = Dimensions.get("window").width;
 
 const LineGraph = () => {
     
-    const [loading,setLoading] = React.useState(true)
+    const [loading,setLoading] = React.useState(true);
     const [dayPrice,setDayPrice]=React.useState([]);
+    const [getId,setId]= React.useState(1);
     let graphDataValueY=[];
     let graphDataValueX=[];
 
@@ -66,7 +61,7 @@ const LineGraph = () => {
                   <Rect
                       x={tipX + 25}
                       y={tipY - 1}
-                      width={tipW -50}
+                      width={tipW -30}
                       height={tipH - 2}
                       fill={'rgba(255, 255, 255, 0.9)'}
                       // fill={'transparent'}
@@ -84,10 +79,9 @@ const LineGraph = () => {
                       stroke={stroke}
                   />
                    <Text x={tipTxtX+15} y={tipTxtY} dx={10} dy={0} fontSize={14} fontFamily="arial" fill="black">
-                   € { value }
+                 Price: €{ value }
             </Text>
-              <Text  x={tipTxtX+15}   y={tipTxtY + 14} dx={10} dy={0} fontSize={14} fontFamily="arial" fill="black">h:
-              {data.labels[index] }
+              <Text  x={tipTxtX+15}   y={tipTxtY + 14} dx={10} dy={0} fontSize={14} fontFamily="arial" fill="black">Time:  {data.labels[index] }
             </Text>
 
                
@@ -130,7 +124,8 @@ const LineGraph = () => {
 
 
     useEffect(()=>{
-
+       console.log(getId);
+      if(getId===1){
       fetch("http://185.96.163.154:2335/getDayPrice",{
         method:'POST',
         headers:{
@@ -153,7 +148,32 @@ const LineGraph = () => {
           setDayPrice(data.OperatingPoint);
           setLoading(false)
     })
-    },[])
+  }
+  //    else if(getId===2){
+  //     fetch("http://185.96.163.154:2335/getDayPrice",{
+  //       method:'POST',
+  //       headers:{
+  //           'content-type':'application/json',
+  //           'Api-Key':'India75',
+  //           // 'Connection':'keep-alive',
+  //           // 'Accept-Encoding':'gzip,deflate,br',
+  //           // 'Accept':'*/*'
+  //       },
+  //       body:JSON.stringify({"sensor_id": "1234abc1",
+  //       "gateway_id": "1234abc2",
+  //       "app_id": "1234abc2",
+  //       "start_date": "2022-10-19",
+  //       "end_date": "2022-10-25"
+  //       })
+
+  //   })
+  //   .then(res=>res.json())
+  //   .then(data=>{
+  //         setDayPrice(data.OperatingPoint);
+  //         setLoading(false)
+  //   })
+  // }
+    },[getId])
     
 
     // console.log(dayPrice);
@@ -189,16 +209,17 @@ const LineGraph = () => {
         barPercentage: 0,
         useShadowColorFromDataset:false,// optional
         fillShadowGradient:'#6aeb81',
-        fillShadowGradientFromOpacity:0.4,
-        fillShadowGradientToOpacity:0.01,
+        fillShadowGradientFromOpacity:0.3,
+        fillShadowGradientToOpacity:0,
       };
 
     
   const [state, setState] =React.useState({});
-
+ 
    
     return (
         <SafeAreaView >
+          <StaticButton setId={setId} getId={getId}/>
           {
 
          loading?<Text>  Loading.........</Text>:<LineChart

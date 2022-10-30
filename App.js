@@ -7,14 +7,19 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Screen from './components/Screens/Screens';
 import { View } from 'react-native';
+import { createContext } from 'react';
+
+const User=createContext();
 
 const App=()=> {
-
-  
-  
-  return (
+const user={}
+ const[price,setPrice]=React.useState('');
+ const[mac,setMac]=React.useState('');
+return(
   <NavigationContainer>
+    <User.Provider value={{price,setPrice,mac,setMac}}>
     <Screen/>   
+    </User.Provider>
 </NavigationContainer>
   )
 }
@@ -22,6 +27,7 @@ const App=()=> {
 
 
 export default App;
+export {User};
 
 
 
