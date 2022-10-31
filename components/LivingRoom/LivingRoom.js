@@ -32,6 +32,58 @@ const LivingRoom = ({navigation}) => {
         const [slideCompletionValue, setSlideCompletionValue] = React.useState(0);
         const[userDetail,setUserDetail]=React.useState({});
 
+        //-----------------switch on/off-------------------------
+if(isEnabled){
+        fetch("http://185.96.163.154:2336/controlSwitch",{
+          method:'POST',
+          headers:{
+              'content-type':'application/json',
+              'Api-Key':'India75',
+              // 'Connection':'keep-alive',
+              // 'Accept-Encoding':'gzip,deflate,br',
+              // 'Accept':'*/*'
+          },
+          body:JSON.stringify({
+            "gateway_id": "30:ae:7b:e2:e6:9e",
+            "switch_id": "000d6f000be7b777",
+            "off_on":1
+          })
+
+      })
+      .then(res=>console.log('on'))
+      .then(data=>{
+          // console.log(data);
+      })
+
+
+    }
+    else{
+
+      fetch("http://185.96.163.154:2336/controlSwitch",{
+        method:'POST',
+        headers:{
+            'content-type':'application/json',
+            'Api-Key':'India75',
+            // 'Connection':'keep-alive',
+            // 'Accept-Encoding':'gzip,deflate,br',
+            // 'Accept':'*/*'
+        },
+        body:JSON.stringify({
+          "gateway_id": "30:ae:7b:e2:e6:9e",
+          "switch_id": "000d6f000be7b777",
+          "off_on":0
+        })
+
+    })
+    .then(res=>console.log('off'))
+    .then(data=>{
+        // console.log(data);
+    })
+
+
+    }
+
+
           //  -----------------------get all users--------------------------------
         async function getUsers() {
           const response = await fetch(
@@ -53,6 +105,7 @@ const LivingRoom = ({navigation}) => {
 
         //---------------------- button click handle -------------------------
         const handlePrice=async ()=>{
+        if(mac){
           setPrice(slideCompletionValue);
           let users=await  getUsers();
                 
@@ -116,6 +169,10 @@ const LivingRoom = ({navigation}) => {
           })
 
            }
+
+          }else{
+            alert('At first, add your mac id');
+          }
 
         }
 
